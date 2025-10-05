@@ -3,7 +3,6 @@ import { useSetting } from './Settings'
 import './TimeControl.css'
 
 const TimeControl = ({ isTimeRunning, setIsTimeRunning, time, timeRange, setTime }) => {
-  const [sameYear, setSameYear] = useSetting('sameYear', false)
   const [speed, setSpeed] = useSetting('speed')
 
   return (
@@ -28,10 +27,6 @@ const TimeControl = ({ isTimeRunning, setIsTimeRunning, time, timeRange, setTime
         />
       </div>
       <div className="u-flex">
-        <label className="sameYear">
-          <input type="checkbox" checked={sameYear} onChange={() => setSameYear(!sameYear)} />
-          Merge observations in a single year
-        </label>
         <div className="u-flex">
           <button onClick={() => setSpeed(speed >= 5 ? 1 : speed + 2)}>Speed</button>
           <div

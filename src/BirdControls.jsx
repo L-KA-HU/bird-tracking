@@ -16,7 +16,6 @@ const PER_ROW = 3; // avatars per row
 export default function BirdControls() {
   const [activeSpeciesList, setActiveSpeciesList] = useSetting('activeSpeciesList', [])
   const [highlightedSpecies, setHighlightedSpecies] = useSetting('highlightedSpecies', null)
-  const [sameYear, setSameYear] = useSetting('sameYear', false)
   const [speed, setSpeed] = useSetting('speed', 1)
 
   const [species, setSpecies] = useState([])
@@ -142,17 +141,7 @@ export default function BirdControls() {
       </div>
 
       <hr style={{ margin: '12px 0' }} />
-
-      <label style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-        <input
-          type="checkbox"
-          checked={!!sameYear}
-          onChange={e => setSameYear(e.target.checked)}
-        />
-        Merge observations in a single year
-      </label>
-
-      <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 8 }}>
+        <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 8 }}>
         Speed
         <input
           type="range"
