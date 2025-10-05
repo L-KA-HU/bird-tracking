@@ -7,6 +7,7 @@ import { usePageVisibility } from './usePageVisibility'
 import { useSetting } from './Settings'
 import { tsToDate } from './times'
 
+const BASE = import.meta.env.BASE_URL || '/'
 const App = () => {
   const [data, setData] = useState([])
   const [timeRange, setTimeRange] = useState([])
@@ -23,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     document.body.classList.add('loading')
-    fetch('./birds.geojson')
+    fetch(`${BASE}birds.geojson`)
       .then(response => response.json())
       .then(data => data.features)
       .then(features => {
