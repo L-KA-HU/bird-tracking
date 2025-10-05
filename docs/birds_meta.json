@@ -1,0 +1,10 @@
+[
+  { "id": "András",     "name": "András",     "photo": "imgs/andras.jpg" },
+  { "id": "Attila",     "name": "Attila",     "photo": "imgs/attila.jpg" },
+  { "id": "Boróka",     "name": "Boróka",     "photo": "imgs/boroka.jpg" },
+  { "id": "Brünnhilda", "name": "Brünnhilda", "photo": "imgs/brunnhilda.jpg" },
+  { "id": "Etelka",     "name": "Etelka",     "photo": "imgs/etelka.jpg" },
+  { "id": "Gábor",      "name": "Gábor",      "photo": "imgs/gabor.jpg" },
+  { "id": "Noémi",      "name": "Noémi",      "photo": "imgs/noemi.jpg" },
+  { "id": "Tündike",    "name": "Tündike",    "photo": "imgs/tundike.jpg" }
+]
