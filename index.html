@@ -8,7 +8,7 @@
     <link rel="canonical" href="https://l-ka-hu.github.io/bird-tracking/" />
     <meta name="description" content="2024–2025-ben jelölt nagy goda egyedek mozgása – kutatócsoportunk GPS-nyomkövetésének interaktív térképe." />
 
-    <!-- Open Graph / Twitter -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Bird tracking map" />
     <meta property="og:title" content="2024–2025-ben jelölt nagy goda egyedek mozgása" />
@@ -17,14 +17,20 @@
     <meta property="og:image" content="https://l-ka-hu.github.io/bird-tracking/imgs/og.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="2024–2025-ben jelölt nagy goda egyedek mozgása" />
     <meta name="twitter:description" content="Kutatócsoportunk jelölt nagy goda egyedeinek mozgása interaktív térképen." />
     <meta name="twitter:image" content="https://l-ka-hu.github.io/bird-tracking/imgs/og.jpg" />
+
+    <!-- Inline favicon so the browser doesn't request /favicon.ico -->
+    <link rel="icon" type="image/svg+xml"
+      href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="%23a3e635"/></svg>' />
   </head>
   <body>
     <div id="root"></div>
-    <!-- Vite rewrites this to /bird-tracking/assets/... at build time -->
+    <!-- Vite rewrites this to /bird-tracking/assets/... in the build -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
