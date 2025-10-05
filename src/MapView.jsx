@@ -119,7 +119,7 @@ const maxTrail = useMemo(() => {
         >
           <Map
             attributionControl={false}
-            mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json"
+            mapStyle="https://demotiles.maplibre.org/style.json"
           />
         </DeckGL>
       )}
