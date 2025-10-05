@@ -1,42 +1,44 @@
-import { format as formatDate } from 'date-fns'
-import { useSetting } from './Settings'
-import './TimeControl.css'
+import { tsToDate } from './times'
 
-const TimeControl = ({ isTimeRunning, setIsTimeRunning, time, timeRange, setTime }) => {
-  const [speed, setSpeed] = useSetting('speed')
+export default function TimeControl({
+  time,
+  timeRange,
+  setTime,
+  isTimeRunning,
+  setIsTimeRunning,
+}) {
+  const [min = 0, max = 0] = timeRange || []
+  const label = time
+    ? tsToDate(time).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+    : ''
 
   return (
-    <div className="timeControl">
-      <div className="time">
-        {formatDate(new Date(time * 1000), sameYear ? 'dd MMMM' : 'dd MMM yyyy')}
-      </div>
-      <div className="timePlayer">
+    <div className="controls">
+      <div className="timeControlLine">
         <button
-          className={`playPauseButton ${isTimeRunning ? 'pause' : 'play'}`}
+          className="c-button c-button--icon"
           aria-label={isTimeRunning ? 'Pause' : 'Play'}
           onClick={() => setIsTimeRunning(!isTimeRunning)}
-        />
+          title={isTimeRunning ? 'Pause' : 'Play'}
+          style={{ marginRight: 8 }}
+        >
+          {isTimeRunning ? '▮▮' : '▶'}
+        </button>
+
         <input
-          className="timeScale"
           type="range"
-          step={3600 * 24}
-          min={timeRange[0]}
-          max={timeRange[1]}
+          min={min}
+          max={max}
+          step={3600}
           value={time}
           onChange={e => setTime(Number(e.target.value))}
+          style={{ flex: 1 }}
         />
-      </div>
-      <div className="u-flex">
-        <div className="u-flex">
-          <button onClick={() => setSpeed(speed >= 5 ? 1 : speed + 2)}>Speed</button>
-          <div
-            className="speedIndicator"
-            style={{ '--level': Math.floor((speed * 100) / 5) + '%' }}
-          />
+
+        <div style={{ width: 110, textAlign: 'right', marginLeft: 8 }}>
+          {label}
         </div>
       </div>
     </div>
   )
 }
-
-export default TimeControl

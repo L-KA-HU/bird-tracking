@@ -1,20 +1,15 @@
-export const tsToDate = timestamp => new Date(timestamp * 1000)
-export const dateToTs = date => Math.round(date.getTime() / 1000)
+export const tsToDate = ts => new Date(ts * 1000);
 
-export const getTimeRange = (features, sameYear) => {
-  const allTimes = features.flatMap(f => f.properties.times)
-
-  if (sameYear) {
-    const minYear = allTimes.reduce(
-      (min, v) => Math.min(min, tsToDate(v).getFullYear()),
-      [Number.MAX_SAFE_INTEGER]
-    )
-    const minTime = dateToTs(new Date(minYear, 0, 1))
-    return [minTime, minTime + 3600 * 24 * 365]
-  } else {
-    return allTimes.reduce(
-      ([min, max], v) => [Math.min(min, v), Math.max(max, v)],
-      [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER]
-    )
+export const getTimeRange = (features) => {
+  if (!Array.isArray(features) || features.length === 0) return [0, 0];
+  let min = Infinity, max = -Infinity;
+  for (const f of features) {
+    const times = f?.properties?.times || [];
+    for (const t of times) {
+      if (t < min) min = t;
+      if (t > max) max = t;
+    }
   }
-}
+  if (!isFinite(min) || !isFinite(max)) return [0, 0];
+  return [min, max];
+};
