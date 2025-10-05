@@ -1,24 +1,43 @@
-import React, { createContext, useState, useContext } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
-export const SettingsContext = createContext()
+const SettingsContext = createContext(null)
 
-export const SettingsProvider = ({ children, initial = {} }) => {
-  const [settings, setSettings] = useState(initial)
+export const SettingsProvider = ({ children }) => {
+  const [settings, setSettings] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('settings') || '{}')
+    } catch {
+      return {}
+    }
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('settings', JSON.stringify(settings))
+    } catch {
+      /* ignore storage errors */
+    }
+  }, [settings])
+
+  const setSetting = (key, value) =>
+    setSettings(prev => ({ ...prev, [key]: value }))
 
   return (
-    <SettingsContext.Provider value={{ settings, setSettings }}>
+    <SettingsContext.Provider value={{ settings, setSetting }}>
       {children}
     </SettingsContext.Provider>
   )
 }
 
-export const useSetting = (key, defaultValue) => {
-  const { settings, setSettings } = useContext(SettingsContext)
-
-  return [
-    settings[key] || defaultValue,
-    value => {
-      setSettings({ ...settings, [key]: value })
-    },
-  ]
+export const useSetting = (key, defaultValue = null) => {
+  const ctx = useContext(SettingsContext)
+  if (!ctx) {
+    throw new Error('useSetting must be used inside <SettingsProvider>')
+  }
+  const value = Object.prototype.hasOwnProperty.call(ctx.settings, key)
+    ? ctx.settings[key]
+    : defaultValue
+  const setValue = v => ctx.setSetting(key, v)
+  return [value, setValue]
 }
+
