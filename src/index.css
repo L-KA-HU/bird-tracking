@@ -148,3 +148,11 @@ button {
     display: none;
   }
 }
+.credits {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.35;
+  opacity: 0.85;
+}
+.credits a { color: #a8c7ff; text-decoration: none; }
+.credits a:hover { text-decoration: underline; }

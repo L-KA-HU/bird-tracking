@@ -5,7 +5,7 @@ import Credits from './Credits'
 const Panel = ({ time, timeRange, setTime, isTimeRunning, setIsTimeRunning }) => {
   return (
     <div id="panel">
-      <h1 className="u-mobileHidden">Flying paths of some birds</h1>
+      <h1 className="u-mobileHidden">2024–2025-ben jelölt nagy goda egyedek mozgása</h1>
       <TimeControl
         time={time}
         timeRange={timeRange}
