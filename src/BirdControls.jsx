@@ -58,7 +58,7 @@ export default function BirdControls() {
 
   return (
     <div className="panel">
-      <h2 className="u-mobileHidden">Our tagged birds</h2>
+      <h2 className="u-mobileHidden">Általunk jelölt madarak</h2>
 
       <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
         <button onClick={selectAll}>Select all</button>
