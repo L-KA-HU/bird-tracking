@@ -65,81 +65,39 @@ export default function BirdControls() {
       </div>
 
       {/* --- GRID of avatars --- */}
-      <div
-        className="legend-grid"
-        style={{
-          display: 'grid',
-          gridTemplateColumns: `repeat(${PER_ROW}, minmax(0, 1fr))`,
-          gap: 14,
-          alignItems: 'start'
-        }}
-      >
-        {species.map(name => {
-          const info = meta[nfc(name)] || meta[strip(name)] || {}
-          const label = info.name || name
-          const photo = withBase(info.photo)
-          const col = colors[name] || [150, 150, 150]
-          const rgb = `rgb(${col[0]}, ${col[1]}, ${col[2]})`
+      <div className="legendGrid">
+  {species.map(name => {
+    const info = meta[nfc(name)] || meta[strip(name)] || {}
+    const label = info.name || name
+    const photo = withBase(info.photo)
+    const col = colors[name] || [150,150,150]
+    const rgb = `rgb(${col[0]}, ${col[1]}, ${col[2]})`
 
-          return (
-            <div
-              key={name}
-              style={{ textAlign: 'center' }}
-              onMouseEnter={() => setHighlightedSpecies(name)}
-              onMouseLeave={() => setHighlightedSpecies(null)}
-            >
-              {/* Avatar */}
-              {photo ? (
-                <img
-                  src={photo}
-                  alt={label}
-                  width={AVATAR}
-                  height={AVATAR}
-                  style={{
-                    display: 'block',
-                    margin: '0 auto',
-                    borderRadius: '50%',
-                    border: `3px solid ${rgb}`,
-                    objectFit: 'cover'
-                  }}
-                  onError={(e) => { e.currentTarget.style.display = 'none' }}
-                />
-              ) : (
-                <span
-                  style={{
-                    display: 'inline-block',
-                    width: AVATAR,
-                    height: AVATAR,
-                    margin: '0 auto',
-                    background: rgb,
-                    borderRadius: '50%'
-                  }}
-                />
-              )}
-
-              {/* Checkbox + name UNDER the photo */}
-              <label
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: 8,
-                  marginTop: 8,
-                  cursor: 'pointer'
-                }}
-              >
-                <input
-                  type="checkbox"
-                  checked={(activeSpeciesList || []).includes(name)}
-                  onChange={() => toggle(name)}
-                />
-                <span style={{ display: 'block', lineHeight: 1.1 }}>{label}</span>
-              </label>
-            </div>
-          )
-        })}
-      </div>
-
+    return (
+      <label key={name} className="legendItem">
+        <img
+          className="legendPhoto"
+          src={photo}
+          alt={label}
+          style={{ '--legend-color': rgb }}
+          onError={e => { e.currentTarget.style.display = 'none' }}
+        />
+        <span
+          className="legendName"
+          onMouseEnter={() => setHighlightedSpecies(name)}
+          onMouseLeave={() => setHighlightedSpecies(null)}
+        >
+          {label}
+        </span>
+        <input
+          type="checkbox"
+          checked={(activeSpeciesList || []).includes(name)}
+          onChange={() => toggle(name)}
+        />
+      </label>
+    )
+  })}
+</div>
       <hr style={{ margin: '12px 0' }} />
         <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 8 }}>
         Speed

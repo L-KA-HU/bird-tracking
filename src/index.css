@@ -156,3 +156,48 @@ button {
 }
 .credits a { color: #a8c7ff; text-decoration: none; }
 .credits a:hover { text-decoration: underline; }
+/* Make the side panel scroll on small screens */
+#panel { max-height: 100vh; overflow:auto; }
+
+/* Legend grid & items */
+.legendGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 per row */
+  gap: 12px;
+}
+
+.legendItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.legendPhoto {
+  width: clamp(60px, 20vw, 96px);
+  height: clamp(60px, 20vw, 96px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--legend-color, #aaa);
+}
+
+.legendName {
+  margin-top: 6px;
+  line-height: 1.2;
+  font-size: clamp(12px, 2.8vw, 14px);
+  max-width: 12ch; /* prevent wrapping too wide */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.legendItem input[type="checkbox"] {
+  margin-top: 6px; /* small tap target under the name */
+}
+
+/* Extra-tight phones */
+@media (max-width: 400px) {
+  .legendGrid { gap: 8px; }
+  .legendPhoto { border-width: 2px; }
+  .legendName { font-size: 12px; }
+}
